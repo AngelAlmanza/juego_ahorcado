@@ -26,7 +26,22 @@ def chooseDifficulty(length):
         return length * 4
 
 
+def printLetters(word, letter):
+    pass
+
+
+def game(word, attempts):
+    while attempts > 0:
+        letter = input("Type a letter: ")
+        if word.find(letter) == -1:
+            print("Ups!, that letter don't is in word")
+            attempts = attempts - 1
+        else:
+            printLetters(word, letter)
+
+
 def run():
+    os.system("clear")
     playing = 1
     words = getListOfWords()
 
@@ -35,7 +50,15 @@ def run():
         index = chooseWord()
         word = words[index]
         attempts = chooseDifficulty(len(word))
-        playing = int(input("Do you want to playing yet ? \n0.No \n1.Si\n"))
+
+        if game(word, attempts):
+            print("You Win!!!")
+        else:
+            print("You Loose:(")
+
+        playing = input("Do you want to playing yet ? \n0.No \n1.Si\n")
+        assert playing.isnumeric(), "Excuse us, invalid value"
+        playing = int(playing)
         if playing != 1:
             break
         os.system("clear")
